@@ -1,4 +1,0 @@
-i3 config  = ~/.config/i3/config
-polybar    = ~/.config/polybar/config.ini
-alacritty  = ~/.config/alacritty/alacritty.yml  & ~/.config/alacritty/themes/
-nano       = /etc/nanorc
