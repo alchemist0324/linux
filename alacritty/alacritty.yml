@@ -1,5 +1,5 @@
-import:
-  - ~/.config/alacritty/themes/gotham.yaml
+#import:
+#  - ~/.config/alacritty/themes/gotham.yaml
 
 window:
   padding:
