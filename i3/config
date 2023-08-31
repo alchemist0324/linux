@@ -12,51 +12,14 @@
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
 font pango:monospace 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-
-### Colors
-#------------------------------------------------------------------------------------------------------------------
-set $c_primary #23a9d5
-set $c_sub #4b5975
-set $c_text #ccccb5
-set $c_bg #1b2028
-set $c_bg_alt #151a21
-set $c_err #b81b2c
-set $c_err_alt #b81b2c
-
-# Bar colours
-set $b_primary        #11111b
-set $b_sub            #89b4fa
-set $b_font           #89b4fa
-set $b_background     #11111bFF
-set $b_ws_background  #181825
-
-# Window Colours
-set $w_focused   #F5F5DC
-set $w_font      #FFFFFF
-set $w_title     #FFFFFF
 
 
 ### Audio
@@ -90,35 +53,26 @@ bindsym $mod+b exec firefox
 
 bindsym $mod+Shift+x exec i3lock
 
-exec_always --no-startup-id polybar --config=~/.rice/configurations/polybar/config.ini
-
 # Rofi Confiuration
 bindsym $mod+d exec rofi -show run
-bindsym $mod+Shift+d exec rofi -show filebrowser
 
-### Monitors & Wallpapers
+### Monitors & Wallpaper
 #------------------------------------------------------------------------------------------------------------------
 exec --no-startup-id xrandr --output DP-3 --mode 2560x1440 --rate 144 --primary
 #exec --no-startup-id xrandr --output HDMI-2 --off
 exec --no-startup-id xrandr --output HDMI-2 --mode 1920x1080 --rate 60 --rotate left --right-of DP-3
 
 # exec ~/.fehbg
-
 exec --no-startup-id nitrogen --restore
+
 
 ### Compositor
 #------------------------------------------------------------------------------------------------------------------
 exec --no-startup-id picom -CGb
 
 
-
-# start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+### Window and Workspace Keybindings
+#------------------------------------------------------------------------------------------------------------------
 
 # change focus
 bindsym $mod+j focus left
@@ -167,11 +121,7 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-#bindsym $mod+d focus child
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 ### Workspaces
 #------------------------------------------------------------------------------------------------------------------
 
@@ -222,6 +172,7 @@ workspace 8 output DP-3
 workspace 9 output HDMI-2
 workspace 10 output HDMI-2
 
+
 ### System Keybindings
 #------------------------------------------------------------------------------------------------------------------
 
@@ -260,9 +211,20 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-gaps inner 10
-gaps outer 8
+### Border Size and Colouring
+#------------------------------------------------------------------------------------------------------------------
+
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 for_window [class="^.*"] border pixel 1
 
-client.focused          $w_focused $w_focused $w_focused $w_focused
+gaps inner 10
+gaps outer 8
